@@ -1,0 +1,78 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  min-height: 100vh;
+  background-image: url(<%= image_url("eww-botfullpage3.png") %>);
+  backdrop-filter: blur(3px); /* Adjust the blur radius here */
+  background-size: cover;
+  background-position: right center; /* Adjust the background position here */
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  text-align: center; /* Center-align the logo horizontally */
+  position: relative;
+}
+
+.logo {
+  margin: 20px auto; /* Center-align the logo vertically */
+  display: block; /* Ensure it's a block-level element */
+}
+
+.content {
+  background-color: #e7e7e7; /* Background color of the content box */
+  border-radius: 10px; /* Rounded corners */
+  margin: 0 20vh; /* Padding on the left and right sides */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
+  height: 88vh;
+}
+
+.notice {
+  position: relative;
+  background-color: #22b244; /* Deep Red Color */
+  color: white;
+  padding: 10px 10px;
+  font-size: 24px;
+  text-align: left;
+  font-weight: bold;
+  border-radius: 10px; /* Make the banner more rounded */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.alert {
+  position: relative;
+  background-color: #b2ab22; /* Deep Red Color */
+  color: white;
+  padding: 10px 10px;
+  font-size: 24px;
+  text-align: left;
+  font-weight: bold;
+  border-radius: 10px; /* Make the banner more rounded */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.close-icon {
+  position: absolute;
+  top: 5px; /* Adjust the top position within the .top-banner */
+  right: 10px; /* Adjust the right position within the .top-banner */
+  font-size: 20px;
+  cursor: pointer;
+}
