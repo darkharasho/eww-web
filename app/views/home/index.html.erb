@@ -1,57 +1,9 @@
-
 <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      min-height: 100vh;
-      background-image: url(<%= image_url("eww-botfullpage3.png") %>);
-      backdrop-filter: blur(3px); /* Adjust the blur radius here */
-      background-size: cover;
-      background-position: right center; /* Adjust the background position here */
-      font-family: 'Roboto', sans-serif;
-    }
-
-
-    .button-container {
-        min-height: 90vh;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login-button {
-        background-color: #B22222; /* Deep Red Color */
-        color: white;
-        border: none;
-        padding: 20px 40px;
-        font-size: 24px;
-        border-radius: 10px;
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s ease;
-        z-index: 1;
-        text-decoration: none;
-    }
-
-    .login-button:hover {
-        background-color: #8B0000; /* Darker Red on Hover */
-    }
-
-    .header {
-      text-align: center; /* Center-align the logo horizontally */
-      position: relative;
-    }
-
-    .logo {
-      margin: 20px auto; /* Center-align the logo vertically */
-      display: block; /* Ensure it's a block-level element */
-    }
+  .content {
+    background-color: transparent !important; /* Remove background color */
+    box-shadow: none !important; /* Remove box shadow */
+  }
 </style>
-
 <div class="blur-layer"></div>
 <div class="button-container">
     <%= link_to "Sign In", sign_in_path, class: "login-button" %>
