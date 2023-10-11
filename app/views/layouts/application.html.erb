@@ -8,11 +8,41 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
 
-  <body>
-      <p class="notice"><%= notice %></p>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+          min-height: 100vh;
+          background-image: url(<%= image_url("eww-botfullpage3.png") %>);
+          backdrop-filter: blur(3px); /* Adjust the blur radius here */
+          background-size: cover;
+          background-position: right center; /* Adjust the background position here */
+          font-family: 'Roboto', sans-serif;
+        }
+
+        .header {
+          text-align: center; /* Center-align the logo horizontally */
+          position: relative;
+        }
+
+        .logo {
+          margin: 20px auto; /* Center-align the logo vertically */
+          display: block; /* Ensure it's a block-level element */
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+    <%= link_to root_path do %>
+      <%= image_tag("eww-bot-console-logo-white.png", alt: "Logo", style: "width: 300px") %>
+    <% end %>
+  </div>
+  <div class="content">
+    <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     <%= yield %>
-  </body>
+  </div>
+</body>
 </html>
