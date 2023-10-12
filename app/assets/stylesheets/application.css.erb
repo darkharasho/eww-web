@@ -27,13 +27,46 @@
 }
 
 .header {
-  text-align: center; /* Center-align the logo horizontally */
-  position: relative;
+    display: flex;
+    justify-content: space-between; /* Aligns items to the left and right edges */
+    align-items: center; /* Centers items vertically */
+    padding: 0 10px; /* Padding for the header */
+    text-align: center;
 }
 
 .logo {
-  margin: 20px auto; /* Center-align the logo vertically */
-  display: block; /* Ensure it's a block-level element */
+    margin: 20px; /* Center-align the logo vertically */
+    text-align: left;
+}
+
+.login {
+    text-align: right;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px; /* Add padding to create a button-like appearance */
+    background-color: #B22222; /* Button background color */
+    border: 2px solid #8e1c1c; /* Button border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover for interaction */
+    transition: background-color 0.3s, border-color 0.3s; /* Add a hover effect */
+
+}
+
+.avatar {
+    border-radius: 100px;
+    width: 30px;
+    height: 30px; /* Set the height for a square avatar, adjust as needed */
+    margin-right: 10px; /* Adjust the spacing between the avatar and username */
+    display: flex;
+    align-items: center;
+}
+
+.username {
+    font-size: 20px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold */
+    color: white; /* Text color */
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; /* Black outline */
+    text-align: center;
 }
 
 .content {

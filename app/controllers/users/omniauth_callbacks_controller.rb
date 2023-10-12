@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :verify_authenticity_token, only: :discord
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
@@ -10,11 +11,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def discord
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
-    sign_in(:account, @user)
+    if @user.persisted?
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: "Discord") if is_navigational_format?
+    else
+      session["devise.discord_data"] = request.env["omniauth.auth"].except(:extra) # Removing extra as it can overflow some session stores
+      redirect_to root_path
+    end
+  end
 
-    # in my case response was incorrect, so I made it by myself.
-    redirect_to after_sign_in_path_for(@user),
-              notice: t('devise.omniauth_callbacks.success', kind: @user.provider)
+  def failure
+    redirect_to root_path
   end
   
 

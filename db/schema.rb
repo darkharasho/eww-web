@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_11_183229) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_12_060915) do
   create_table "arcdps", force: :cascade do |t|
     t.datetime "last_updated_at", precision: nil, null: false
   end
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_11_183229) do
     t.string "gw2_username", limit: 255
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil
+    t.integer "user_id"
     t.index ["discord_id"], name: "member_discord_id", unique: true
     t.index ["gw2_api_key"], name: "member_gw2_api_key", unique: true
     t.index ["username"], name: "member_username", unique: true

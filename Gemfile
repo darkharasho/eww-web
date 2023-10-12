@@ -29,8 +29,10 @@ gem "jbuilder"
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-discord'
+gem 'omniauth-rails_csrf_protection'
 gem 'carrierwave'
 gem 'carrierwave-i18n'
+gem 'discordrb'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
