@@ -26,8 +26,16 @@
 </head>
 <body>
   <div class="header">
-    <%= link_to root_path do %>
-      <%= image_tag("eww-bot-console-logo-white.png", alt: "Logo", style: "width: 300px") %>
+    <div class="logo">
+      <%= link_to root_path do %>
+        <%= image_tag("eww-bot-console-logo-white.png", alt: "Logo", style: "width: 300px") %>
+      <% end %>
+    </div>
+
+    <%- if current_user %>
+      <div class="login">
+        <%= image_tag(current_user.remote_image_url, class: "avatar") %> <span class="username"><%= current_user.username %></span>
+      </div>
     <% end %>
   </div>
   <div class="content">

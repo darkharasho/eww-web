@@ -9,13 +9,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
 
-  get 'auth/:provider/callback', to: 'sessions#create'
-  devise_scope :user do
-    get 'sign_in', to: 'devise/sessions#new'
-  end
+  resources :guilds, only: [:index]
 
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    omniauth_callbacks: "users/omniauth_callbacks"
-  }
+  get 'auth/:provider/callback', to: 'sessions#create'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  devise_scope :user do
+    get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
 end
