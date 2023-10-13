@@ -9,29 +9,20 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-    <style>
-        body {
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          min-height: 100vh;
-          background-image: url(<%= image_url("eww-botfullpage3.png") %>);
-          backdrop-filter: blur(3px); /* Adjust the blur radius here */
-          background-size: cover;
-          background-position: right center; /* Adjust the background position here */
-          font-family: 'Roboto', sans-serif;
+    <script>
+      function closeNotice() {
+        const banner = document.querySelector('.notice');
+        if (banner) {
+          banner.style.display = 'none';
         }
-
-        .header {
-          text-align: center; /* Center-align the logo horizontally */
-          position: relative;
+      }
+      function closeAlert() {
+        const banner = document.querySelector('.alert');
+        if (banner) {
+          banner.style.display = 'none';
         }
-
-        .logo {
-          margin: 20px auto; /* Center-align the logo vertically */
-          display: block; /* Ensure it's a block-level element */
-        }
-    </style>
+      }
+    </script>
 </head>
 <body>
   <div class="header">
@@ -40,8 +31,18 @@
     <% end %>
   </div>
   <div class="content">
-    <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+    <% if notice %>
+      <p class="notice">
+        <%= notice %>
+        <span class="close-icon" onclick="closeNotice()">&times;</span>
+      </p>
+    <% end %>
+    <% if alert %>
+      <p class="alert">
+        <%= alert %>
+        <span class="close-icon" onclick="closeAlert()">&times;</span>
+      </p>
+    <% end %>
     <%= yield %>
   </div>
 </body>
