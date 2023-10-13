@@ -15,4 +15,10 @@ class GuildsController < ApplicationController
     @config = @guild.configs
     render :show
   end
+
+  private
+  def ensure_guild_access
+    guild = Guild.find(params[:id])
+    current_user.guild_roles(guild).any? guild.allowed_admin_role_ids
+  end
 end

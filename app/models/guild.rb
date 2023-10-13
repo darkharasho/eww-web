@@ -20,6 +20,10 @@ class Guild < ApplicationRecord
     DiscordApi.new.guild_channels(guild_id: self.id, type: "guild_announcements")
   end
 
+  def allowed_admin_role_ids
+    self.configs.find_by(name: "allowed_admin_role_ids")
+  end
+
   def roles
     DiscordApi.new.guild_roles(guild_id: self.id)
   end

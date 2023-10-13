@@ -67,4 +67,10 @@ class ConfigsController < ApplicationController
     end
     params
   end
+
+  private
+  def ensure_guild_access
+    guild = Config.find(params[:id]).guild
+    current_user.guild_roles(guild).any? guild.allowed_admin_role_ids
+  end
 end
