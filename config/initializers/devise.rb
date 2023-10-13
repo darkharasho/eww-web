@@ -273,7 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # discord_oauth = Rails.application.credentials.discord
-  config.omniauth :discord,  ENV['DISCORD_CLIENT_ID'], ENV['DISCORD_CLIENT_SECRET'], scope: 'email identify', callback_url: ENV["DISCORD_CALLBACK_URL"]
+  config.omniauth :discord,  ENV['DISCORD_CLIENT_ID'], ENV['DISCORD_CLIENT_SECRET'], scope: 'email identify guilds', callback_url: ENV["DISCORD_CALLBACK_URL"]
   
 
   # ==> Warden configuration
