@@ -1,4 +1,9 @@
 <div class="row">
+  <div class="one column">
+    <%= link_to guild_path(@config.guild), style: "display:flex; align-items: center;" do %>
+      <%= material_icon.shape(:arrow_back).md_18 %> <span>back</span>
+    <% end %>
+  </div>
   <div class="four columns">
     <%= image_tag image_url(@config.guild.remote_image_url), class: "guild-img" %>
   </div>
@@ -9,30 +14,19 @@
 
 <br />
 
-<%= form_for @config do |form| %>
-  <div class="row">
-    <% case @config.name %>
-    <% when "build_update_channel_id" %>
-      <div class="six columns">
-        <label for="exampleRecipientInput"><%= material_icon.shape(:forum).md_18 %> Build Update Channel</label>
-        <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
-          <% @config.guild.forum_channels.each do |channel| %>
-            <%= content_tag :option, channel['name'], value: channel["id"] %>
-          <% end %>
-        <% end %>
-      </div>
-    <% when "raid_days" %>
-      <div class="six columns">
-        <label for="exampleRecipientInput"><%= material_icon.shape(:calendar_month).md_18 %> Raid Days</label>
-        <%= form.select :value, weekday_options_for_select(index_as_value: true), {}, {class: 'u-full-width', multiple: true, style: "height: 150px;"} %>
-      </div>
-    <% else %>
-      <label for="exampleMessage"><%= @config.name %></label>
-      <div class="row">
-        <%= form.text_area :value, class: "u-full-width" %>
-      </div>
-    <% end %>
-  </div>
-  <%= form.submit class: "button-primary" %>
+<% case @config.name %>
+<% when "build_update_channel_id" %>
+  <%= render "build_update_channel_form", config: config %>
+<% when "raid_days" %>
+  <%= render "raid_days_form", config: config %>
+<% when "guild_member_role_id" %>
+  <%= render "guild_member_form", config: config %>
+<% when "raid_notification" %>
+  <%= render "raid_notification_form", config: config %>
+<% when "build_manager_role_ids" %>
+  <%= render "build_manger_roles_form", config: config %>
+<% when "build_forum_channel_id" %>
+  <%= render "build_forum_channel_form", config: config %>
+<% else %>
+  <div>Error</div>
 <% end %>
-
