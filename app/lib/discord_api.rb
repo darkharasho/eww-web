@@ -73,6 +73,14 @@ class DiscordApi
     )
   end
 
+  def guild_member(member:, guild:)
+    client(
+      type: "Bot",
+      endpoint: "/guilds/#{guild.id}/members/#{member.id}",
+      token: @creds[:token]
+    )
+  end
+
   private
   def client(type:, endpoint:, token:)
     api_endpoint = "https://discord.com/api/v10#{endpoint}"

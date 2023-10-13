@@ -9,7 +9,10 @@ class User < ApplicationRecord
 
   has_secure_token :auth_token
 
-
+  def guild_roles(guild)
+    member = Member.find_by(guild_id: guild.id)
+    DiscordApi.new(user: self).guild_member(guild: guild, member: member)
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

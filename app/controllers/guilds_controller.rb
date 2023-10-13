@@ -1,5 +1,6 @@
 class GuildsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guild_access
   def index
     @current_user = current_user
     @guilds = []

@@ -1,5 +1,6 @@
 class ConfigsController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guild_access
 
   def edit
     @config = Config.find(params[:id])
