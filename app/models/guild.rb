@@ -12,6 +12,10 @@ class Guild < ApplicationRecord
     DiscordApi.new.guild_channels(guild_id: self.id, type: "forum_channels")
   end
 
+  def text_channels
+    DiscordApi.new.guild_channels(guild_id: self.id, type: "text_channels")
+  end
+
   def announcement_channels
     DiscordApi.new.guild_channels(guild_id: self.id, type: "guild_announcements")
   end

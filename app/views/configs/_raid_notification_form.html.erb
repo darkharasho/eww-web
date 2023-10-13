@@ -1,0 +1,13 @@
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %> Default Notification Roles</label>
+      <%= select_tag :role_ids, options_for_select(@role_multiselect), class: 'u-full-width', multiple: true, style: "height: 150px;" %>
+    </div>
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %> Open Tag Notification Roles</label>
+      <%= select_tag :open_tag_role_ids, options_for_select(@role_multiselect), class: 'u-full-width', multiple: true, style: "height: 150px;" %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>

@@ -1,0 +1,9 @@
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:calendar_month).md_18 %> Raid Days</label>
+      <%= form.select :value, weekday_options_for_select(index_as_value: true), {}, {class: 'u-full-width', multiple: true, style: "height: 150px;"} %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>

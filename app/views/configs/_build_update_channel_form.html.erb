@@ -1,0 +1,13 @@
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %> Build Update Channel</label>
+      <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
+        <% @config.guild.text_channels.each do |channel| %>
+          <%= content_tag :option, channel['name'], value: channel["id"] %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>
