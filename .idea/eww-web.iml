@@ -79,6 +79,7 @@
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.21.4, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="material_icons (v4.0.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.0.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.5.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
