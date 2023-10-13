@@ -1,0 +1,9 @@
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput"><%= material_icon.shape(:alternate_email).md_18 %> Allowed Admin Roles</label>
+      <%= form.select :value, options_for_select(@role_multiselect), {}, {class: 'u-full-width', multiple: true, style: "height: 150px;"} %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>

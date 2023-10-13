@@ -27,6 +27,10 @@
   <%= render "build_manger_roles_form", config: config %>
 <% when "build_forum_channel_id" %>
   <%= render "build_forum_channel_form", config: config %>
+<% when "auto_attendance" %>
+  <%= render "auto_attendance_form", config: config %>
+<% when "allowed_admin_role_ids" %>
+  <%= render "allowed_admins_form", config: config %>
 <% else %>
   <div>Error</div>
 <% end %>

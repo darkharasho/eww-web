@@ -3,13 +3,16 @@ class ConfigsController < ApplicationController
 
   def edit
     @config = Config.find(params[:id])
-    case @config.name
-    when "raid_notification", "build_manager_role_ids"
+
+    if %w[raid_notification build_manager_role_ids allowed_admin_role_ids].include? @config.name
       @role_multiselect = @config.guild.roles.map do |role|
         [role["name"], role["id"]]
       end
-    else
     end
+    if ["auto_attendance"].include? @config.name
+      @channel_select = @config.guild.text_channels.map{|channel| [channel["name"], channel["id"]]}
+    end
+
     render :edit
   end
 
@@ -31,7 +34,7 @@ class ConfigsController < ApplicationController
 
   def config_params
     formatted_params = format_for_config(params)
-    value = params[:config][:value]
+    value = formatted_params[:config][:value]
 
     if value.is_a?(Array)
       formatted_params.require(:config).permit(value: [])
@@ -49,6 +52,16 @@ class ConfigsController < ApplicationController
       params[:config][:value] = {
         role_ids: params["role_ids"].map(&:to_i),
         open_tag_role_ids: params["open_tag_role_ids"].map(&:to_i)
+      }.to_s
+    when "auto_attendance"
+      params[:config] = {}
+      params[:config][:value] = {
+        enabled: params["enabled"],
+        channel_id: params["channel_id"].to_i,
+        time: {
+          hour: params["time"]["time(4i)"],
+          minute: params["time"]["time(5i)"]
+        }
       }.to_s
     end
     params

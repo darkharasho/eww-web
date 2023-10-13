@@ -1,0 +1,19 @@
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:settings).md_18 %> Enabled</label>
+      <%= select_tag :enabled, options_for_select([["True", true], ["False", false]]), class: 'u-full-width' %>
+    </div>
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %> Channel</label>
+      <%= select_tag :channel_id, options_for_select(@channel_select), class: 'u-full-width' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:schedule).md_18 %> Time (UTC)</label>
+      <%= time_select :time, :time, prompt: {hour: 'Choose hour', minute: 'Choose minute'} %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>
