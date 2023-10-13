@@ -1,3 +1,18 @@
 <h1>
   Guilds<br>
 </h1>
+<div class="row">
+  <%- @guilds.each do |guild| %>
+    <div class="three columns">
+      <%= link_to guild_path(guild.id) do %>
+        <div class="guild-box">
+          <%= image_tag image_url(guild.remote_image_url) %>
+          <div class="guild-box-name">
+            <%= guild["name"] %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+</div>

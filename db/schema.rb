@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_12_060915) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_13_051858) do
   create_table "arcdps", force: :cascade do |t|
     t.datetime "last_updated_at", precision: nil, null: false
   end
@@ -35,6 +35,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_060915) do
     t.integer "guild_id", null: false
     t.string "modified", limit: 255, null: false
     t.index ["name"], name: "feed_name", unique: true
+  end
+
+  create_table "guilds", force: :cascade do |t|
+    t.string "uid", default: "", null: false
+    t.string "name", default: "", null: false
+    t.string "remote_image_url", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "member", force: :cascade do |t|
@@ -64,6 +72,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_060915) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "auth_token"
+    t.datetime "auth_expiration"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

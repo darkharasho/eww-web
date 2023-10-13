@@ -72,3 +72,5 @@ yarn-debug.log*
 /config/master.key
 
 .env
+
+/config/master.key
