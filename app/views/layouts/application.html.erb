@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 
     <script>
       function closeNotice() {
@@ -22,36 +23,69 @@
           banner.style.display = 'none';
         }
       }
+
+      isHidden = true
+
+      function toggleMenu() {
+        const dropdown = document.querySelector('.dropdown-content');
+        if (dropdown) {
+          if (isHidden) {
+            dropdown.style.display = 'block'; // Show the element
+          } else {
+            dropdown.style.display = 'none'; // Hide the element
+          }
+          isHidden = !isHidden; // Toggle the state
+        }
+      }
     </script>
 </head>
 <body>
   <div class="header">
-    <div class="logo">
-      <%= link_to root_path do %>
-        <%= image_tag("eww-bot-console-logo-white.png", alt: "Logo", style: "width: 300px") %>
+    <div class="row">
+      <div class="ten columns">
+        <div class="logo">
+          <%= link_to root_path do %>
+            <%= image_tag("eww-bot-console-logo-white.png", alt: "Logo", style: "width: 300px") %>
+          <% end %>
+        </div>
+      </div>
+
+      <%- if current_user %>
+        <div class="two columns">
+          <div class="login-button u-max-full-width logo" onclick="toggleMenu()">
+            <%= image_tag(current_user.remote_image_url, class: "avatar") %> <span class="username"><%= current_user.username %></span>
+          </div>
+          <div class="dropdown-content hidden">
+            <div><%= link_to "logout", sign_out_path, method: :delete  %></div>
+          </div>
+        </div>
+      <% else %>
+        <div class="two columns">
+          <div class="logo">
+            <%= button_to "Sign in with Discord", omniauth_authorize_path(User, :discord), data: { turbo: false }, class: "login-button u-max-full-width" %>
+          </div>
+        </div>
       <% end %>
     </div>
-
-    <%- if current_user %>
-      <div class="login">
-        <%= image_tag(current_user.remote_image_url, class: "avatar") %> <span class="username"><%= current_user.username %></span>
-      </div>
-    <% end %>
   </div>
-  <div class="content">
-    <% if notice %>
-      <p class="notice">
-        <%= notice %>
-        <span class="close-icon" onclick="closeNotice()">&times;</span>
-      </p>
-    <% end %>
-    <% if alert %>
-      <p class="alert">
-        <%= alert %>
-        <span class="close-icon" onclick="closeAlert()">&times;</span>
-      </p>
-    <% end %>
-    <%= yield %>
+  <div class="row">
+    <div class="one column">&nbsp</div>
+    <div class="ten columns content">
+      <% if notice %>
+        <p class="notice">
+          <%= notice %>
+          <span class="close-icon" onclick="closeNotice()">&times;</span>
+        </p>
+      <% end %>
+      <% if alert %>
+        <p class="alert">
+          <%= alert %>
+          <span class="close-icon" onclick="closeAlert()">&times;</span>
+        </p>
+      <% end %>
+      <%= yield %>
+      <div class="one column">&nbsp</div>
+    </div>
   </div>
 </body>
 </html>

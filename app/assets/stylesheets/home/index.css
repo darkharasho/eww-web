@@ -1,25 +1,9 @@
 .button-container {
-    min-height: 90vh;
+    min-height: 50vh;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.login-button {
-    background-color: #B22222; /* Deep Red Color */
-    color: white;
-    border: none;
-    padding: 20px 40px;
-    font-size: 24px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-    z-index: 1;
-    text-decoration: none;
 }
 
 .login-button:hover {
