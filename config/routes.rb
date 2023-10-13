@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "home#index"
 
-  resources :guilds, only: [:index]
+  resources :guilds, only: [:index, :show]
+  resources :guilds, param: :id
+  resources :configs, only: [:edit, :update]
 
   get 'auth/:provider/callback', to: 'sessions#create'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

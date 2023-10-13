@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="four columns">
+    <%= image_tag image_url(@config.guild.remote_image_url), class: "guild-img" %>
+  </div>
+  <div class="four columns">
+    <h1><%= @config.guild.name %></h1>
+  </div>
+</div>
+
+<br />
+
+<%= form_for @config do |form| %>
+  <div class="row">
+    <% case @config.name %>
+    <% when "build_update_channel_id" %>
+      <div class="six columns">
+        <label for="exampleRecipientInput"><%= material_icon.shape(:forum).md_18 %> Build Update Channel</label>
+        <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
+          <% @config.guild.forum_channels.each do |channel| %>
+            <%= content_tag :option, channel['name'], value: channel["id"] %>
+          <% end %>
+        <% end %>
+      </div>
+    <% when "raid_days" %>
+      <div class="six columns">
+        <label for="exampleRecipientInput"><%= material_icon.shape(:calendar_month).md_18 %> Raid Days</label>
+        <%= form.select :value, weekday_options_for_select(index_as_value: true), {}, {class: 'u-full-width', multiple: true, style: "height: 150px;"} %>
+      </div>
+    <% else %>
+      <label for="exampleMessage"><%= @config.name %></label>
+      <div class="row">
+        <%= form.text_area :value, class: "u-full-width" %>
+      </div>
+    <% end %>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>
+

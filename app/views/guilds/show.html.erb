@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="four columns">
+    <%= image_tag image_url(@guild.remote_image_url), class: "guild-img" %>
+  </div>
+  <div class="four columns">
+    <h1><%= @guild.name %></h1>
+  </div>
+</div>
+
+<table class="u-full-width">
+  <thead>
+  <tr>
+    <th>Config</th>
+    <th>Value</th>
+    <th>Type</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <%- @config.each do |cfg| %>
+      <tr>
+        <td><%= cfg.name %></td>
+        <td><pre><code><%= JSON.pretty_generate(cfg.value) %></code></pre></td>
+        <td><code><%= cfg.value_type %></code></td>
+        <td><%= link_to "edit", edit_config_path(cfg) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

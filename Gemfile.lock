@@ -1,3 +1,17 @@
+GIT
+  remote: https://github.com/shardlab/discordrb.git
+  revision: a873d4efad8e87af5732a7e63044ff95cebc11d6
+  branch: main
+  specs:
+    discordrb (3.5.0)
+      discordrb-webhooks (~> 3.5.0)
+      ffi (>= 1.9.24)
+      opus-ruby
+      rest-client (>= 2.0.0)
+      websocket-client-simple (>= 0.3.0)
+    discordrb-webhooks (3.5.0)
+      rest-client (>= 2.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,14 +129,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    discordrb (3.5.0)
-      discordrb-webhooks (~> 3.5.0)
-      ffi (>= 1.9.24)
-      opus-ruby
-      rest-client (>= 2.0.0)
-      websocket-client-simple (>= 0.3.0)
-    discordrb-webhooks (3.5.0)
-      rest-client (>= 2.0.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
@@ -170,6 +176,8 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    material_icons (4.0.0)
+      railties (>= 3.2)
     matrix (0.4.2)
     method_source (1.0.0)
     mime-types (3.5.1)
@@ -337,10 +345,11 @@ DEPENDENCIES
   carrierwave-i18n
   debug
   devise
-  discordrb
+  discordrb!
   dotenv-rails
   importmap-rails
   jbuilder
+  material_icons
   omniauth
   omniauth-discord
   omniauth-rails_csrf_protection
