@@ -1,0 +1,33 @@
+.guild-box {
+  width: 150px;
+  text-align: center;
+  background-color: #8d8d8d;
+  border: 2px solid #8e1c1c;
+  border-radius: 5px;
+  padding: 10px;
+  color: #fff;
+}
+
+.guild-box img {
+  width: 150px; /* Adjust the width of the icon image */
+  height: 150px; /* Adjust the height of the icon image */
+  border-radius: 50%; /* Makes the image round (for a circular icon) */
+  border: 1px solid #8e1c1c;
+  display: block;
+  margin: 0 auto;
+}
+
+.guild-box-name {
+  margin-top: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.guild-img {
+  width: 150px; /* Adjust the width of the icon image */
+  height: 150px; /* Adjust the height of the icon image */
+  border-radius: 50%; /* Makes the image round (for a circular icon) */
+  border: 1px solid #8e1c1c;
+  display: block;
+  margin: 0 auto;
+}

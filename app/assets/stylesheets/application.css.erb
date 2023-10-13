@@ -12,6 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
+ *= require material_icons.helpers
  */
 
  body {
@@ -26,6 +28,11 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+a {
+  text-decoration: none;
+}
+
 
 .hidden {
   display: none;
@@ -104,9 +111,9 @@
 
 .content {
   background-color: #e7e7e7; /* Background color of the content box */
-  border-radius: 10px; /* Rounded corners */
+  border-radius: 5px; /* Rounded corners */
 /*  margin: 0 20vh; /* Padding on the left and right sides */
-  padding: 20px;
+  padding-top: 30px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
   min-height: 80vh;
   max-height: 100%;
@@ -117,6 +124,8 @@
   background-color: #22b244; /* Deep Red Color */
   color: white;
   padding: 10px 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   font-size: 24px;
   text-align: left;
   font-weight: bold;

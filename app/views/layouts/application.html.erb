@@ -56,7 +56,8 @@
             <%= image_tag(current_user.remote_image_url, class: "avatar") %> <span class="username"><%= current_user.username %></span>
           </div>
           <div class="dropdown-content hidden">
-            <div><%= link_to "logout", sign_out_path, method: :delete  %></div>
+            <div><%= link_to "guilds", guilds_path %></div>
+            <div><%= link_to "logout", sign_out_path, method: :delete %></div>
           </div>
         </div>
       <% else %>
@@ -83,7 +84,13 @@
           <span class="close-icon" onclick="closeAlert()">&times;</span>
         </p>
       <% end %>
-      <%= yield %>
+      <div class="row">
+        <div class="one column">&nbsp</div>
+        <div class="ten columns">
+          <%= yield %>
+        </div>
+        <div class="one column">&nbsp</div>
+      </div>
       <div class="one column">&nbsp</div>
     </div>
   </div>

@@ -55,8 +55,7 @@
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.8.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="discordrb (v3.5.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="discordrb-webhooks (v3.5.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="discordrb (v3.5.0@a873d4, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="domain_name (v0.5.20190701, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv (v2.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv-rails (v2.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
