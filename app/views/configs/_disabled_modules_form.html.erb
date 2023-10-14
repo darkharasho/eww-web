@@ -1,7 +1,7 @@
 <% content_for :javascript do %>
   <script type='text/javascript'>
     new SlimSelect({
-      select: '#selectDays',
+      select: '#selectModules',
       settings: {
         closeOnSelect: false,
         allowDeselect: true,
@@ -15,8 +15,8 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:calendar_month).md_18 %>&nbspRaid Days</label>
-      <%= form.select :value, weekday_options_for_select(@config.value, index_as_value: true), {}, {id: "selectDays", class: 'u-full-width slim-dropdown', multiple: true} %>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:toggle_off).outlined.md_18 %>&nbspDisabled Modules</label>
+      <%= form.select :value, options_for_select(GuildHelper.modules.collect { |g| [g, g] }, selected: @config.value), {}, {id: "selectModules", class: 'u-full-width slim-dropdown', multiple: true} %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>

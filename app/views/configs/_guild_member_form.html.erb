@@ -1,12 +1,8 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).md_18 %> Guild Member Role</label>
-      <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
-        <% @config.guild.roles.each do |role| %>
-          <%= content_tag :option, role['name'], value: role["id"] %>
-        <% end %>
-      <% end %>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %>&nbspGuild Member Role</label>
+      <%= form.select :value, options_for_select(@config.guild.roles.collect { |g| ["@#{g["name"].gsub('@', '')}", g["id"]] }, @config.value), {}, {class: 'u-full-width'} %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>

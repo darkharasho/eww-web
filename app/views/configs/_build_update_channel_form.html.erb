@@ -1,12 +1,8 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %> Build Update Channel</label>
-      <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
-        <% @config.guild.text_channels.each do |channel| %>
-          <%= content_tag :option, channel['name'], value: channel["id"] %>
-        <% end %>
-      <% end %>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %>&nbspBuild Update Channel</label>
+      <%= form.select :value, options_for_select(@config.guild.text_channels.collect { |g| [g["name"], g["id"]] }, @config.value), {}, {class: 'u-full-width'} %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>

@@ -1,7 +1,7 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).md_18 %>&nbspBuild Forum Channel</label>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).twotone.md_18 %>&nbspReview Forum Channel</label>
       <%= form.select :value, options_for_select(@config.guild.forum_channels.collect { |g| [g["name"], g["id"]] }, @config.value), {}, {class: 'u-full-width'} %>
     </div>
   </div>

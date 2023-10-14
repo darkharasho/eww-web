@@ -17,6 +17,10 @@ class GuildHelper
     %w[Mesmer Mirage Chronomancer Virtuoso Guardian Dragonhunter Firebrand Willbender Necromancer Reaper Scourge Harbinger Ranger Druid Soulbeast Untamed Elementalist Tempest Weaver Catalyst Warrior Berserker Spellbreaker Bladesworn Thief Daredevil Deadeye Specter Engineer Holosmith Scrapper Mechanist Revenant Renegade Herald Vindicator]
   end
 
+  def self.modules
+    %w[apply attendance check-attendance import-builds raid-notification raid-reminder set-build show-attendance time-in-role toggle-soundboard]
+  end
+
   def self.determine_class_icon(klass)
     case klass.downcase
     when /reaper/

@@ -15,7 +15,7 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %> Build Manager Roles</label>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %>&nbspBuild Manager Roles</label>
       <%= form.select :value, options_for_select(@role_multiselect, selected: @config.value), {}, {id: "selectRoles", class: 'u-full-width slim-dropdown', multiple: true} %>
     </div>
   </div>

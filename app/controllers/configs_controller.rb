@@ -35,14 +35,17 @@ class ConfigsController < ApplicationController
         @build_classes.each do |item|
           selected = @config.value["classes"].any? { |cls| cls == item }
           store_selected << item if selected
-          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: item, selected: selected))
+          classed_item = GuildHelper.determine_class_icon(item)
+          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: item, selected: selected, "data-html": "#{classed_item}&nbsp#{item}"))
         end
       end
 
       options << ActionController::Base.helpers.content_tag(:optgroup, label: "Other GW2 Classes", "data-closable" => "close") do ||
-        GuildHelper.all_classes.reject{ |cls| @build_classes.include?(cls) }.each do |item|
+        GuildHelper.all_classes.each do |item|
           selected = @config.value["classes"].any? { |cls| cls == item }
-          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: item, selected: selected))
+          classed_item = GuildHelper.determine_class_icon(item)
+          disabled = @build_classes.include?(item)
+          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: item, selected: selected, disabled: disabled, "data-html": "#{classed_item}&nbsp#{item}"))
         end
       end
 
@@ -64,7 +67,11 @@ class ConfigsController < ApplicationController
     @config = Config.find params[:id]
     respond_to do |format|
       if config_params[:value].class == Array
-        @config.update value: config_params[:value].reject{|c| c.blank?}.map(&:to_i)
+        if config_params[:value].all? { |str| /\A\d+\z/ === str }
+          @config.update value: config_params[:value].reject{|c| c.blank?}.map(&:to_i)
+        else
+          @config.update value: config_params[:value].reject{|c| c.blank?}
+        end
         format.html { redirect_to @config.guild, notice: 'Config updated successfully' }
       elsif @config.update value: eval(config_params[:value])
         format.html { redirect_to @config.guild, notice: 'Config updated successfully' }
@@ -120,6 +127,12 @@ class ConfigsController < ApplicationController
         },
         role_ids: params["role_ids"]&.map(&:to_i),
         classes: params["build_classes"]
+      }.to_s
+    when "arcdps_updates", "game_updates"
+      params[:config] = {}
+      params[:config][:value] = {
+        enabled: params["enabled"],
+        channel_id: params["channel_id"] ? params["channel_id"].to_i : params["channel_id"]
       }.to_s
     end
     params

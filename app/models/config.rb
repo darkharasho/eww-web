@@ -5,14 +5,16 @@ class Config < ApplicationRecord
   belongs_to :guild, foreign_key: :guild_id
 
   def pretty_printed_value
-    if self.name.include? "channel_id"
+    if self.name.include? "forum"
+      format_channels(forum: true)
+    elsif self.name.include? "channel_id"
       format_channels
     elsif self.name.include? "role_id"
       format_roles
     elsif self.name == "raid_days"
       days_of_week = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
       self.value.map do |dow|
-        "<span class=\"inline-icon\"><i class=\"material-icons\">calendar_month</i>&nbsp#{days_of_week[dow]}</span>"
+        "<span class=\"inline-icon\"><i class=\"material-icons twotone\">calendar_month</i>&nbsp#{days_of_week[dow]}</span>"
       end
     elsif self.name == "raid_reminder"
       format_raid_reminder
@@ -22,20 +24,27 @@ class Config < ApplicationRecord
       format_raid_notification
     elsif self.name.include? "updates"
       format_update
+    elsif self.name. == "disabled_modules"
+      format_modules
     else
       Array(JSON.pretty_generate(self.value))
     end
   end
 
   private
-  def format_channels(channel_ids: nil)
+  def format_channels(channel_ids: nil, forum: false)
     channel_ids = self.value unless channel_ids
     channels = self.guild.channels.select do |channel|
       channel if Array(channel_ids).flatten.include? channel["id"].to_i
     end
 
     channels.map do |channel|
-      "<span class=\"inline-icon\"><i class=\"material-icons\">tag</i>&nbsp#{channel["name"]}</span>"
+      if forum
+        "<span class=\"inline-icon\"><i class=\"material-icons twotone\">forum</i>&nbsp#{channel["name"]}</span>"
+
+      else
+        "<span class=\"inline-icon\"><i class=\"material-icons twotone\">tag</i>&nbsp#{channel["name"]}</span>"
+      end
     end
   end
 
@@ -46,7 +55,7 @@ class Config < ApplicationRecord
     end
 
     roles.map do |role|
-      "<span class=\"inline-icon\"><i class=\"material-icons\">alternate_email</i>&nbsp#{role["name"]}</span>"
+      "<span class=\"inline-icon\"><i class=\"material-icons twotone\">alternate_email</i>&nbsp#{role["name"]}</span>"
     end
   end
 
@@ -54,9 +63,21 @@ class Config < ApplicationRecord
     time = Time.parse("#{self.value["time"]["hour"]}:#{self.value["time"]["minute"]}").strftime("%-k:%M")
     """
     <span class=\"inline-icon\">
-      <i class=\"material-icons\">schedule</i>&nbsp#{time} (UTC)
+      <i class=\"material-icons twotone\">schedule</i>&nbsp#{time} (UTC)
     </span>
     """
+  end
+
+  def format_modules
+    GuildHelper.modules.map do |mod|
+      icon = value.include?(mod) ? 'toggle_off' : 'toggle_on'
+      style = value.include?(mod) ? 'outlined' : 'twotone'
+      """
+      <span class=\"inline-icon\">
+        <i class=\"material-icons #{style}\">#{icon}</i>&nbsp#{mod}
+      </span>
+      """
+    end
   end
 
   def format_update
@@ -70,9 +91,11 @@ class Config < ApplicationRecord
   end
 
   def format_toggle(toggleable)
+    icon = toggleable.downcase == 'true' ? 'toggle_on' : 'toggle_off'
+    style = toggleable.downcase == 'true' ? 'twotone' : 'outlined'
     """
     <span class=\"inline-icon\">
-      <i class=\"material-icons outlined\">#{toggleable.downcase == 'true' ? 'toggle_on' : 'toggle_off'}</i>&nbsp#{toggleable}
+      <i class=\"material-icons #{style}\">#{icon}</i>&nbsp#{toggleable}
     </span>
     """
   end
@@ -90,7 +113,7 @@ class Config < ApplicationRecord
     html += "<div><b>Table Style:</b></div>"
     html += """
     <span class=\"inline-icon\">
-      <i class=\"material-icons outlined\">table_rows</i>&nbsp#{self.value['table_style']}
+      <i class=\"material-icons twotone\">table_rows</i>&nbsp#{self.value['table_style']}
     </span>
     """
 

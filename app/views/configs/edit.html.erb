@@ -33,6 +33,12 @@
   <%= render "allowed_admins_form", config: config %>
 <% when "raid_reminder" %>
   <%= render 'raid_reminder_form', config: config %>
+<% when "review_forum_channel_id" %>
+  <%= render 'review_forum_channel_form', config: config %>
+<% when "disabled_modules" %>
+  <%= render 'disabled_modules_form', config: config %>
+<% when "arcdps_updates", "game_updates" %>
+  <%= render 'updates_form', config: config %>
 <% else %>
   <div><pre><code><%= JSON.pretty_generate(@config.value) %></code></pre></div>
 <% end %>
