@@ -40,7 +40,8 @@
   <div class="row">
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:schedule).twotone.md_18 %>&nbspTime (UTC)</label>
-      <%= time_select :time, :time, prompt: {hour: 'Choose hour', minute: 'Choose minute'}, class: "time-select" %>
+      <%= time_select :time, :time, {hour: 'Choose hour', minute: 'Choose minute'}, {default: {hour: @config.value.dig("time", "hour"), minute: @config.value.dig("time", "minute")}} %>
+
     </div>
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).twotone.md_18 %>&nbspRoles</label>
@@ -50,7 +51,7 @@
   <div class="row">
     <div class="six columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:shield).twotone.md_18 %>&nbspClasses</label>
-      <%= select_tag :build_classes, options_for_select(@build_classes, selected: @config.value["classes"]), id: "selectElement", class: 'u-full-width slim-dropdown', multiple: true %>
+      <%= select_tag :build_classes, options_for_select(@guild_build_options, selected: @config.value["classes"]), id: "selectElement", class: 'u-full-width slim-dropdown', multiple: true %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>
