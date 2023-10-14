@@ -158,7 +158,8 @@ class Config < ApplicationRecord
   end
 
   def config_validation
-    if name == "raid_reminder"
+    case name
+    when "raid_reminder"
       errors.add(:hour, "cannot be blank") if value["time"]["hour"].blank?
       errors.add(:minute, "cannot be blank") if value["time"]["minute"].blank?
       errors.add(:classes, "cannot be blank") if value["classes"].blank?
@@ -166,6 +167,20 @@ class Config < ApplicationRecord
       errors.add(:channel, "cannot be blank") if value["channel_id"].blank?
       errors.add(:hide_empty_rows, "cannot be blank") if value["hide_empty_rows"].blank?
       errors.add(:table_style, "cannot be blank") if value["table_style"].blank?
+    when "build_update_channel_id", "build_forum_channel_id", "review_forum_channel_id"
+      errors.add(:channel, "cannot be blank") if value.blank?
+    when "raid_days"
+      errors.add(:days, "cannot be blank") if value.blank?
+    when "guild_member_role_id", "build_manager_role_ids", "allowed_admin_role_ids", "commander_role_ids"
+      errors.add(:roles, "cannot be blank") if value.blank?
+    when "auto_attendance"
+      errors.add(:enabled, "cannot be blank") if value["enabled"].blank?
+      errors.add(:channel, "cannot be blank") if value["channel_id"].blank?
+      errors.add(:hour, "cannot be blank") if value["time"]["hour"].blank?
+      errors.add(:minute, "cannot be blank") if value["time"]["minute"].blank?
+    when "arcdps_updates", "game_updates"
+      errors.add(:enabled, "cannot be blank") if value["enabled"].blank?
+      errors.add(:channel, "cannot be blank") if value["channel_id"].blank?
     end
   end
 end
