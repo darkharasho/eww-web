@@ -32,5 +32,5 @@
 <% when "allowed_admin_role_ids" %>
   <%= render "allowed_admins_form", config: config %>
 <% else %>
-  <div>Error</div>
+  <div><pre><code><%= JSON.pretty_generate(@config.value) %></code></pre></div>
 <% end %>

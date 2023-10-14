@@ -20,7 +20,13 @@
     <%- @config.each do |cfg| %>
       <tr>
         <td><%= cfg.name %></td>
-        <td><pre><code><%= JSON.pretty_generate(cfg.value) %></code></pre></td>
+        <td>
+          <div class="fake-code">
+            <% cfg.pretty_printed_value.each do |v| %>
+              <%= sanitize v %>
+            <% end %>
+          </div>
+        </td>
         <td><code><%= cfg.value_type %></code></td>
         <td><%= link_to "edit", edit_config_path(cfg) %></td>
       </tr>

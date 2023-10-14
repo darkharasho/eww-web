@@ -39,7 +39,7 @@ class DiscordApi
     matched_guilds
   end
 
-  def guild_channels(guild_id:, type:)
+  def guild_channels(guild_id:, type: nil)
     response = client(
       type: "Bot",
       endpoint: "/guilds/#{guild_id}/channels",
@@ -56,7 +56,7 @@ class DiscordApi
                    when "forum_channels"
                      15
                    else
-                     # type code here
+                     return response
                    end
     if response.class == Hash
       response

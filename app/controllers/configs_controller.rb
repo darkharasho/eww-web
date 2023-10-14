@@ -71,6 +71,8 @@ class ConfigsController < ApplicationController
   private
   def ensure_guild_access
     guild = Config.find(params[:id]).guild
-    current_user.guild_roles(guild).any? guild.allowed_admin_role_ids
+    unless current_user.guild_roles(guild).any? { |role_id| guild.allowed_admin_role_ids.include?(role_id) }
+      redirect_to root_path, alert: 'Unauthorized'
+    end
   end
 end

@@ -8,6 +8,10 @@ class Guild < ApplicationRecord
     end
   end
 
+  def channels
+    DiscordApi.new.guild_channels(guild_id: self.id)
+  end
+
   def forum_channels
     DiscordApi.new.guild_channels(guild_id: self.id, type: "forum_channels")
   end
@@ -21,7 +25,7 @@ class Guild < ApplicationRecord
   end
 
   def allowed_admin_role_ids
-    self.configs.find_by(name: "allowed_admin_role_ids")
+    self.configs.find_by(name: "allowed_admin_role_ids").value
   end
 
   def roles
