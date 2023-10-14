@@ -101,20 +101,22 @@ class DiscordApi
     # Create a URI object with the API endpoint
     uri = URI(api_endpoint)
 
-    # Create an HTTP request
-    request = Net::HTTP::Get.new(uri)
-    request['Authorization'] = "#{type} #{token}" # Include your bot token as a Bearer token
+    Rails.cache.fetch([api_endpoint, token], :expires => 1.hour) do
+      # Create an HTTP request
+      request = Net::HTTP::Get.new(uri)
+      request['Authorization'] = "#{type} #{token}" # Include your bot token as a Bearer token
 
-    # Make the HTTP request
-    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-      http.request(request)
-    end
+      # Make the HTTP request
+      response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(request)
+      end
 
-    # Check the response and parse JSON if successful
-    if response.code.to_i == 200
-      JSON.parse(response.body)
-    else
-      JSON.parse(response.body)
+      # Check the response and parse JSON if successful
+      if response.code.to_i == 200
+        JSON.parse(response.body)
+      else
+        JSON.parse(response.body)
+      end
     end
   end
 end
