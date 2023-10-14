@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
+  authenticated :user do
+    root :to => 'guilds#index', as: :authenticated_root
+  end
   root to: "home#index"
 
   resources :guilds, only: [:index, :show]
