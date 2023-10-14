@@ -9,6 +9,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/slim-select@latest/dist/slimselect.css" />
 
     <script>
       function closeNotice() {
@@ -94,5 +96,6 @@
       <div class="one column">&nbsp</div>
     </div>
   </div>
+  <%= yield :javascript %>
 </body>
 </html>

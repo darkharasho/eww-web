@@ -4,7 +4,7 @@
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).md_18 %> Build Forum Channel</label>
       <%= form.select :value, {}, {}, {class: 'u-full-width'} do %>
         <% @config.guild.forum_channels.each do |channel| %>
-          <%= content_tag :option, channel['name'], value: channel["id"] %>
+          <%= content_tag :option, channel['name'], value: channel["id"].to_s %>
         <% end %>
       <% end %>
     </div>

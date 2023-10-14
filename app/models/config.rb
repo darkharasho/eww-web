@@ -15,15 +15,22 @@ class Config < ApplicationRecord
       end
     elsif self.name == "raid_reminder"
       format_raid_reminder
+    elsif self.name == "auto_attendance"
+      format_auto_attendance
+    elsif self.name == "raid_notification"
+      format_raid_notification
+    elsif self.name.include? "updates"
+      format_update
     else
       Array(JSON.pretty_generate(self.value))
     end
   end
 
   private
-  def format_channels
+  def format_channels(channel_ids: nil)
+    channel_ids = self.value unless channel_ids
     channels = self.guild.channels.select do |channel|
-      channel if Array(self.value).flatten.include? channel["id"].to_i
+      channel if Array(channel_ids).flatten.include? channel["id"].to_i
     end
 
     channels.map do |channel|
@@ -31,9 +38,10 @@ class Config < ApplicationRecord
     end
   end
 
-  def format_roles
+  def format_roles(roles: nil)
+    roles = self.value unless roles
     roles = self.guild.roles.select do |role|
-      role if Array(self.value).flatten.include? role["id"].to_i
+      role if Array(roles).flatten.include? role["id"].to_i
     end
 
     roles.map do |role|
@@ -41,20 +49,42 @@ class Config < ApplicationRecord
     end
   end
 
+  def format_time
+    time = Time.parse("#{self.value["time"]["hour"]}:#{self.value["time"]["minute"]}").strftime("%-k:%M")
+    """
+    <span class=\"inline-icon\">
+      <i class=\"material-icons\">schedule</i>&nbsp#{time} (UTC)
+    </span>
+    """
+  end
+
+  def format_update
+    html = ""
+    html += "<div><b>Enabled?:</b></div>"
+    html += format_toggle(self.value["enabled"])
+    html += "<div><b>Channel:</b></div>"
+    html += format_channels(channel_ids: self.value["channel_id"]).join(" ")
+
+    [html]
+  end
+
+  def format_toggle(toggleable)
+    """
+    <span class=\"inline-icon\">
+      <i class=\"material-icons outlined\">#{toggleable.downcase == 'true' ? 'toggle_on' : 'toggle_off'}</i>&nbsp#{toggleable}
+    </span>
+    """
+  end
+
   def format_raid_reminder
-    html = "<div class=\"row\"><div class=\"three columns\">"
+    html = "<div class=\"row\"><div class=\"four columns\">"
     html += "<div><b>Channel:</b></div>"
     html += format_channels.join(" ")
 
     html += "<div><b>Roles:</b></div>"
     html += format_roles.join(" ")
     html += "<div><b>Time:</b></div>"
-    time = Time.parse("#{self.value["time"]["hour"]}:#{self.value["time"]["minute"]}").strftime("%-k:%M")
-    html += """
-    <span class=\"inline-icon\">
-      <i class=\"material-icons\">schedule</i>&nbsp#{time} (UTC)
-    </span>
-    """
+    html += format_time
 
     html += "<div><b>Table Style:</b></div>"
     html += """
@@ -64,11 +94,7 @@ class Config < ApplicationRecord
     """
 
     html += "<div><b>Hide Empty Rows?:</b></div>"
-    html += """
-    <span class=\"inline-icon\">
-      <i class=\"material-icons outlined\">#{self.value['hide_empty_rows'].downcase == 'true' ? 'toggle_on' : 'toggle_off'}</i>&nbsp#{self.value['hide_empty_rows']}
-    </span>
-    """
+    html += format_toggle(self.value["hide_empty_rows"])
 
     html += "</div><div class=\"three columns\">"
 
@@ -84,6 +110,26 @@ class Config < ApplicationRecord
 
     html += "</div></div>"
 
+    [html]
+  end
+
+  def format_auto_attendance
+    html = ""
+    html += "<div><b>Enabled?:</b></div>"
+    html += format_toggle(self.value["enabled"])
+    html += "<div><b>Channel:</b></div>"
+    html += format_channels.join(" ")
+    html += "<div><b>Time:</b></div>"
+    html += format_time
+    [html]
+  end
+
+  def format_raid_notification
+    html = ""
+    html += "<div><b>Roles:</b></div>"
+    html += format_roles(roles: self.value["role_ids"]).join(" ")
+    html += "<div><b>Open Tag Roles:</b></div>"
+    html += format_roles(roles: self.value["open_tag_role_ids"]).join(" ")
     [html]
   end
 

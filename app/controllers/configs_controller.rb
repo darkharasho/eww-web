@@ -5,13 +5,17 @@ class ConfigsController < ApplicationController
   def edit
     @config = Config.find(params[:id])
 
-    if %w[raid_notification build_manager_role_ids allowed_admin_role_ids].include? @config.name
+    if %w[raid_notification build_manager_role_ids allowed_admin_role_ids raid_reminder].include? @config.name
       @role_multiselect = @config.guild.roles.map do |role|
         [role["name"], role["id"]]
       end
     end
-    if ["auto_attendance"].include? @config.name
+    if %w[auto_attendance raid_reminder].include? @config.name
       @channel_select = @config.guild.text_channels.map{|channel| [channel["name"], channel["id"]]}
+    end
+
+    if %w[raid_reminder].include? @config.name
+      @build_classes = @config.guild.build_classes
     end
 
     render :edit

@@ -53,6 +53,8 @@ class DiscordApi
                      2
                    when "guild_announcements"
                      5
+                   when "public_threads"
+                     11
                    when "forum_channels"
                      15
                    else
@@ -71,6 +73,18 @@ class DiscordApi
       endpoint: "/guilds/#{guild_id}/roles",
       token: @creds[:token]
     )
+  end
+
+  def guild_build_classes(guild_id:)
+    build_forum_channel_config = Config.where(name: "build_forum_channel_id", guild_id: guild_id).first
+    threads = client(
+      type: "Bot",
+      endpoint: "/guilds/#{guild_id}/threads/active",
+      token: @creds[:token]
+    )
+    threads["threads"].select do |thread|
+      thread if thread["parent_id"].to_i == build_forum_channel_config.value
+    end
   end
 
   def guild_member(member:, guild:)

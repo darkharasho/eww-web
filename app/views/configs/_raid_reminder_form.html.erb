@@ -1,0 +1,57 @@
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    new SlimSelect({
+      select: '#selectElement',
+      settings: {
+        closeOnSelect: false,
+        allowDeselect: true,
+        maxSelected: 25,
+        maxValuesShown: 25,
+      },
+    })
+
+    new SlimSelect({
+      select: '#selectRoles',
+      settings: {
+        closeOnSelect: false,
+        allowDeselect: true,
+        maxSelected: 25,
+        maxValuesShown: 25,
+      },
+    })
+  </script>
+<% end %>
+
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="four columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:visibility_off).twotone.md_18 %>&nbspHide Empty Rows</label>
+      <%= select_tag :hide_empty_rows, options_for_select([["True", true], ["False", false]]), class: 'u-full-width' %>
+    </div>
+    <div class="four columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:visibility_off).twotone.md_18 %>&nbspTable Style</label>
+      <%= select_tag :table_style, options_for_select([["Fancy Grid", "fancy_grid"], ["Simple", "simple"], ["List View", "list_view"]]), class: 'u-full-width' %>
+    </div>
+    <div class="four columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).twotone.md_18 %>&nbspChannel</label>
+      <%= select_tag :channel_id, options_for_select(@channel_select), class: 'u-full-width' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="four columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:schedule).twotone.md_18 %>&nbspTime (UTC)</label>
+      <%= time_select :time, :time, prompt: {hour: 'Choose hour', minute: 'Choose minute'}, class: "time-select" %>
+    </div>
+    <div class="four columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).twotone.md_18 %>&nbspRoles</label>
+      <%= select_tag :role_ids, options_for_select(@role_multiselect, selected: @config.value["role_ids"]), id: "selectRoles", class: 'u-full-width slim-dropdown', multiple: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:shield).twotone.md_18 %>&nbspClasses</label>
+      <%= select_tag :build_classes, options_for_select(@build_classes, selected: @config.value["classes"]), id: "selectElement", class: 'u-full-width slim-dropdown', multiple: true %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>

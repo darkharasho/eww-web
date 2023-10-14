@@ -31,4 +31,9 @@ class Guild < ApplicationRecord
   def roles
     DiscordApi.new.guild_roles(guild_id: self.id)
   end
+
+  def build_classes
+    build_class_threads = DiscordApi.new.guild_build_classes(guild_id: self.id)
+    build_class_threads.map {|thread| thread["name"]}
+  end
 end
