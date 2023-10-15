@@ -106,24 +106,32 @@ class ConfigsController < ApplicationController
         open_tag_role_ids: params["open_tag_role_ids"]&.map(&:to_i)
       }.to_s
     when "auto_attendance"
+      timezone_string = params[:client_timezone]
+      time_string = "#{params["time"]["time(4i)"]}:#{params["time"]["time(5i)"]}"
+      specific_time = Time.find_zone(timezone_string).strptime(time_string, "%H:%M")
+      time_in_server_time = specific_time.utc
       params[:config] = {}
       params[:config][:value] = {
         enabled: params["enabled"],
         channel_id: params["channel_id"] ? params["channel_id"].to_i : params["channel_id"],
         time: {
-          hour: params["time"]["time(4i)"],
-          minute: params["time"]["time(5i)"]
+          hour: time_in_server_time.hour,
+          minute: time_in_server_time.min
         }
       }.to_s
     when "raid_reminder"
+      timezone_string = params[:client_timezone]
+      time_string = "#{params["time"]["time(4i)"]}:#{params["time"]["time(5i)"]}"
+      specific_time = Time.find_zone(timezone_string).strptime(time_string, "%H:%M")
+      time_in_server_time = specific_time.utc
       params[:config] = {}
       params[:config][:value] = {
         hide_empty_rows: params["hide_empty_rows"],
         table_style: params["table_style"],
         channel_id: params["channel_id"] ? params["channel_id"].to_i : params["channel_id"],
         time: {
-          hour: params["time"]["time(4i)"],
-          minute: params["time"]["time(5i)"]
+          hour: time_in_server_time.hour,
+          minute: time_in_server_time.min
         },
         role_ids: params["role_ids"]&.map(&:to_i),
         classes: params["build_classes"]

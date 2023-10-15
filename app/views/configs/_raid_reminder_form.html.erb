@@ -19,6 +19,28 @@
         maxValuesShown: 25,
       },
     })
+
+    function getTimezoneAbbreviation(timezone) {
+      const now = new Date();
+      const options = { timeZone: timezone, timeZoneName: 'short' };
+      const abbreviation = now.toLocaleTimeString('en-US', options).split(' ')[2];
+      return abbreviation;
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const clientTimezoneField = document.querySelector("#client_timezone");
+      const clientTimezoneLabel = document.querySelector("#time-select-label")
+
+      const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      clientTimezoneField.value = clientTimezone;
+      const abbreviation = getTimezoneAbbreviation(clientTimezone);
+      const span = document.createElement("span");
+      span.textContent = ` (${abbreviation})`;
+      span.style.paddingLeft = "5px";
+
+      // Append the new span to the label
+      clientTimezoneLabel.appendChild(span);
+    });
   </script>
 <% end %>
 
@@ -39,9 +61,11 @@
   </div>
   <div class="row">
     <div class="four columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:schedule).twotone.md_18 %>&nbspTime (UTC)</label>
+      <label for="exampleRecipientInput" class="inline-icon" id="time-select-label">
+        <%= material_icon.shape(:schedule).twotone.md_18 %>&nbspTime
+      </label>
       <%= time_select :time, :time, {hour: 'Choose hour', minute: 'Choose minute'}, {default: {hour: @config.value.dig("time", "hour"), minute: @config.value.dig("time", "minute")}} %>
-
+      <%= hidden_field_tag :client_timezone, id: "client_timezone_field" %>
     </div>
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).twotone.md_18 %>&nbspRoles</label>
