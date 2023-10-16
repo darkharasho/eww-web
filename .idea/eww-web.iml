@@ -76,6 +76,7 @@
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.11.5, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jwt (v2.7.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="kgio (v2.11.4, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.21.4, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
@@ -116,6 +117,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.2.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.6.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v7.1.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="raindrops (v0.20.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.0.6, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v6.5.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.8.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
@@ -138,6 +140,7 @@
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.6, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf (v0.1.4, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unf_ext (v0.0.8.2, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="unicorn (v6.1.0, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.9, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webrick (v1.8.1, Remote: ruby-3.2.2 (-p53) [gem]" level="application" />
