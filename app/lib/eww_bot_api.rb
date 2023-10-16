@@ -16,6 +16,13 @@ class EwwBotApi
     )
   end
 
+  def self.reload_task(task)
+    self.client(
+      action: "POST",
+      endpoint: "/reload_tasks/#{task}"
+    )
+  end
+
   private
   def self.client(action:, endpoint:)
     api_endpoint = "http://localhost:8000#{endpoint}"

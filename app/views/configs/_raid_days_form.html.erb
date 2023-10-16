@@ -15,7 +15,7 @@
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:calendar_month).md_18 %>&nbspRaid Days</label>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:calendar_month).twotone.md_18 %>&nbspRaid Days</label>
       <%= form.select :value, weekday_options_for_select(@config.value, index_as_value: true), {}, {id: "selectDays", class: 'u-full-width slim-dropdown', multiple: true} %>
     </div>
   </div>

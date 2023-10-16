@@ -78,9 +78,11 @@ class ConfigsController < ApplicationController
         end
         format.html { redirect_to @config.guild, notice: "Config updated successfully | #{response}" }
       elsif @config.update value: eval(config_params[:value])
+        if @config.name == "auto_attendance" || @config.name == "raid_reminder"
+          EwwBotApi.reload_task(@config.name)
+        end
         format.html { redirect_to @config.guild, notice: 'Config updated successfully' }
       else
-        # format.html { redirect_to edit_config_path(@config), alert: @config.errors.full_messages.map{|e| "<p>#{e}</p>"}.join(" ")}
         format.html { redirect_to edit_config_path(@config), alert: @config.errors.full_messages.join(" | ")}
       end
     end
