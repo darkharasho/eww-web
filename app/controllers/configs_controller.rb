@@ -65,14 +65,18 @@ class ConfigsController < ApplicationController
 
   def update
     @config = Config.find params[:id]
+    response = ""
     respond_to do |format|
       if config_params[:value].class == Array
         if config_params[:value].all? { |str| /\A\d+\z/ === str }
           @config.update value: config_params[:value].reject{|c| c.blank?}.map(&:to_i)
         else
           @config.update value: config_params[:value].reject{|c| c.blank?}
+          if @config.name == "disabled_modules"
+            response = EwwBotApi.reload_modules
+          end
         end
-        format.html { redirect_to @config.guild, notice: 'Config updated successfully' }
+        format.html { redirect_to @config.guild, notice: "Config updated successfully | #{response}" }
       elsif @config.update value: eval(config_params[:value])
         format.html { redirect_to @config.guild, notice: 'Config updated successfully' }
       else

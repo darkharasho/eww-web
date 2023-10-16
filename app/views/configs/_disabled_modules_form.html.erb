@@ -16,7 +16,7 @@
   <div class="row">
     <div class="six columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:toggle_off).outlined.md_18 %>&nbspDisabled Modules</label>
-      <%= form.select :value, options_for_select(GuildHelper.modules.collect { |g| [g, g] }, selected: @config.value), {}, {id: "selectModules", class: 'u-full-width slim-dropdown', multiple: true} %>
+      <%= form.select :value, options_for_select(EwwBotApi.modules.collect { |g| [g, g] }, selected: @config.value), {}, {id: "selectModules", class: 'u-full-width slim-dropdown', multiple: true} %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>

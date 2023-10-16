@@ -69,7 +69,7 @@ class Config < ApplicationRecord
   end
 
   def format_modules
-    GuildHelper.modules.map do |mod|
+    EwwBotApi.modules.map do |mod|
       icon = value.include?(mod) ? 'toggle_off' : 'toggle_on'
       style = value.include?(mod) ? 'outlined' : 'twotone'
       """
