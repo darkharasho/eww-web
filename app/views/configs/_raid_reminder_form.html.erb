@@ -49,7 +49,7 @@
       <label for="exampleRecipientInput" class="inline-icon" id="time-select-label">
         <%= material_icon.shape(:schedule).twotone.md_18 %>&nbspTime (<%= @converted_time.zone %>)
       </label>
-      <%= time_select :time, :time, hour: 'Choose hour', minute: 'Choose minute', default: {hour: @converted_time.hour, minute: @converted_time.min} %>
+      <%= time_select :time, :time, hour: 'Choose hour', minute: 'Choose minute', ampm: true, default: {hour: @converted_time.hour, minute: @converted_time.min} %>
     </div>
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).twotone.md_18 %>&nbspRoles</label>
