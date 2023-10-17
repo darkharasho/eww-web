@@ -70,7 +70,7 @@ class ConfigsController < ApplicationController
     response = ""
     respond_to do |format|
       if config_params[:value].class == Array
-        if config_params[:value].all? { |str| /\A\d+\z/ === str }
+        if config_params[:value].reject{|c| c.blank?}.all? { |str| /\A\d+\z/ === str }
           @config.update value: config_params[:value].reject{|c| c.blank?}.map(&:to_i)
         else
           @config.update value: config_params[:value].reject{|c| c.blank?}
