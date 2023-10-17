@@ -17,6 +17,8 @@ class ConfigsController < ApplicationController
       end
     end
     if %w[auto_attendance raid_reminder].include?(@config.name)
+      time_string = "#{@config.value["time"]["hour"]}:#{@config.value["time"]["minute"]}"
+      @converted_time = Time.zone.parse(time_string).in_time_zone(current_user.timezone)
       text_channels = @config.guild.text_channels
       if text_channels.class == Hash && text_channels.dig("message") == "You are being rate limited."
         redirect_to guild_path(@config.guild), alert: "Rate limit reached. Try again later."
@@ -112,32 +114,28 @@ class ConfigsController < ApplicationController
         open_tag_role_ids: params["open_tag_role_ids"]&.map(&:to_i)
       }.to_s
     when "auto_attendance"
-      timezone_string = params[:client_timezone]
       time_string = "#{params["time"]["time(4i)"]}:#{params["time"]["time(5i)"]}"
-      specific_time = Time.find_zone(timezone_string).strptime(time_string, "%H:%M")
-      time_in_server_time = specific_time.utc
+      specific_time = Time.find_zone(current_user.timezone).strptime(time_string, "%H:%M").utc
       params[:config] = {}
       params[:config][:value] = {
         enabled: params["enabled"],
         channel_id: params["channel_id"] ? params["channel_id"].to_i : params["channel_id"],
         time: {
-          hour: time_in_server_time.hour,
-          minute: time_in_server_time.min
+          hour: specific_time.hour,
+          minute: specific_time.min
         }
       }.to_s
     when "raid_reminder"
-      timezone_string = params[:client_timezone]
       time_string = "#{params["time"]["time(4i)"]}:#{params["time"]["time(5i)"]}"
-      specific_time = Time.find_zone(timezone_string).strptime(time_string, "%H:%M")
-      time_in_server_time = specific_time.utc
+      specific_time = Time.find_zone(current_user.timezone).strptime(time_string, "%H:%M").utc
       params[:config] = {}
       params[:config][:value] = {
         hide_empty_rows: params["hide_empty_rows"],
         table_style: params["table_style"],
         channel_id: params["channel_id"] ? params["channel_id"].to_i : params["channel_id"],
         time: {
-          hour: time_in_server_time.hour,
-          minute: time_in_server_time.min
+          hour: specific_time.hour,
+          minute: specific_time.min
         },
         role_ids: params["role_ids"]&.map(&:to_i),
         classes: params["build_classes"]

@@ -1,3 +1,28 @@
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone; // Get the user's timezone
+
+    fetch('/set_timezone', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content // Include the CSRF token
+      },
+      body: JSON.stringify({ timezone: timezone })
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('Timezone updated successfully.');
+        } else {
+          console.error('Failed to update timezone.');
+        }
+      })
+      .catch(error => {
+        console.error('An error occurred:', error);
+      });
+  </script>
+<% end %>
+
 <h1>
   Servers<br>
 </h1>

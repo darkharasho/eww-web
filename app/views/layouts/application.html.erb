@@ -65,7 +65,7 @@
       <% else %>
         <div class="two columns">
           <div class="logo">
-            <%= button_to "Sign in with Discord", omniauth_authorize_path(User, :discord), data: { turbo: false }, class: "login-button u-max-full-width" %>
+            <%= render "devise/sessions/button" %>
           </div>
         </div>
       <% end %>

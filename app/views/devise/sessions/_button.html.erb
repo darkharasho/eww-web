@@ -1,0 +1,2 @@
+<%= button_to "Sign in with Discord", omniauth_authorize_path(User, :discord), data: { turbo: false }, class: "login-button u-max-full-width" %>
+<input type="hidden" name="timezone" value="" id="discord-login-button" autocomplete="off">
