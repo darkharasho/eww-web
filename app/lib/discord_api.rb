@@ -48,22 +48,22 @@ class DiscordApi
 
     channel_type = case type
                    when "text_channels"
-                     0
+                     [0, 5]
                    when "voice_channels"
-                     2
+                     [2]
                    when "guild_announcements"
-                     5
+                     [5]
                    when "public_threads"
-                     11
+                     [11]
                    when "forum_channels"
-                     15
+                     [15]
                    else
                      return response
                    end
     if response.class == Hash
       response
     else
-      response.map{|channel| channel if channel["type"] == channel_type}.reject{|channel| channel.blank?}
+      response.map{|channel| channel if channel_type.include?(channel["type"])}.reject{|channel| channel.blank?}
     end
   end
 
