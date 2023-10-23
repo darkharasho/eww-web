@@ -16,9 +16,13 @@ class ConfigsController < ApplicationController
         end
       end
     end
+
     if %w[auto_attendance raid_reminder].include?(@config.name)
       time_string = "#{@config.value["time"]["hour"]}:#{@config.value["time"]["minute"]}"
       @converted_time = Time.zone.parse(time_string).in_time_zone(current_user.timezone)
+    end
+
+    if %w[auto_attendance raid_reminder raid_notification].include?(@config.name)
       text_channels = @config.guild.text_channels
       if text_channels.class == Hash && text_channels.dig("message") == "You are being rate limited."
         redirect_to guild_path(@config.guild), alert: "Rate limit reached. Try again later."
@@ -111,7 +115,9 @@ class ConfigsController < ApplicationController
       params[:config] = {}
       params[:config][:value] = {
         role_ids: params["role_ids"]&.map(&:to_i),
-        open_tag_role_ids: params["open_tag_role_ids"]&.map(&:to_i)
+        closed_raid_channel_id: params["closed_raid_channel_id"][0].to_i,
+        open_tag_role_ids: params["open_tag_role_ids"]&.map(&:to_i),
+        open_raid_channel_id: params["open_raid_channel_id"][0].to_i
       }.to_s
     when "auto_attendance"
       time_string = "#{params["time"]["time(4i)"]}:#{params["time"]["time(5i)"]}"

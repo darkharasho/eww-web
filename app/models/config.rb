@@ -152,8 +152,10 @@ class Config < ApplicationRecord
     html = ""
     html += "<div><b>Roles:</b></div>"
     html += format_roles(roles: self.value["role_ids"]).join(" ")
+    html += format_channels(channel_ids: [self.value["closed_raid_channel_id"]]).join(" ")
     html += "<div><b>Open Tag Roles:</b></div>"
     html += format_roles(roles: self.value["open_tag_role_ids"]).join(" ")
+    html += format_channels(channel_ids: [self.value["open_raid_channel_id"]]).join(" ")
     [html]
   end
 

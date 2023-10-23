@@ -19,6 +19,26 @@
         maxValuesShown: 25,
       },
     })
+
+    new SlimSelect({
+      select: '#selectOpenRaid',
+      settings: {
+        closeOnSelect: false,
+        allowDeselect: true,
+        maxSelected: 1,
+        maxValuesShown: 25,
+      },
+    })
+
+    new SlimSelect({
+      select: '#selectClosedRaid',
+      settings: {
+        closeOnSelect: false,
+        allowDeselect: true,
+        maxSelected: 1,
+        maxValuesShown: 25,
+      },
+    })
   </script>
 <% end %>
 
@@ -29,8 +49,18 @@
       <%= select_tag :role_ids, options_for_select(@role_multiselect, selected: @config.value["role_ids"]), id: "selectRoles", class: 'u-full-width slim-dropdown', multiple: true %>
     </div>
     <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).md_18 %>&nbspClosed Raid Notification Channel</label>
+      <%= select_tag :closed_raid_channel_id, options_for_select(@channel_select, selected: @config.value["closed_raid_channel_id"]), id: "selectClosedRaid", class: 'u-full-width slim-dropdown', multiple: true %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="six columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %>&nbspOpen Tag Notification Roles</label>
       <%= select_tag :open_tag_role_ids, options_for_select(@role_multiselect, selected: @config.value["open_tag_role_ids"]), id: "selectOpenRoles", class: 'u-full-width slim-dropdown', multiple: true %>
+    </div>
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:forum).md_18 %>&nbspOpen Raid Notification Channel</label>
+      <%= select_tag :open_raid_channel_id, options_for_select(@channel_select, selected: @config.value["open_raid_channel_id"]), id: "selectOpenRaid", class: 'u-full-width slim-dropdown', multiple: true %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>
