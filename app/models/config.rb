@@ -5,6 +5,8 @@ class Config < ApplicationRecord
   belongs_to :guild, foreign_key: :guild_id
 
   def pretty_printed_value
+    return nil if self.value == nil
+
     if self.name.include? "forum"
       format_channels(forum: true)
     elsif self.name.include? "channel_id"

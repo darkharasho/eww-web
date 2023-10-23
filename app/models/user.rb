@@ -38,7 +38,10 @@ class User < ApplicationRecord
     Member.where(discord_id: @user.uid).each do |member|
       member.update user_id: @user.id
     end
-    @user.update auth_token: auth.credentials.token, auth_expiration: Time.at(auth.credentials.expires_at)
+    @user.update auth_token: auth.credentials.token,
+                 auth_expiration: Time.at(auth.credentials.expires_at),
+                 username: auth.info.name,
+                 remote_image_url: auth.info.image if image_available
 
     @user
   end
