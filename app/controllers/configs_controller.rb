@@ -51,7 +51,7 @@ class ConfigsController < ApplicationController
           selected = @config.value["classes"].any? { |cls| cls == item }
           classed_item = GuildHelper.determine_class_icon(item)
           disabled = @build_classes.include?(item)
-          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: item, selected: selected, disabled: disabled, "data-html": "#{classed_item}&nbsp#{item}"))
+          ActionController::Base.helpers.concat(ActionController::Base.helpers.content_tag(:option, item, value: disabled ? "#{item}-disabled" : item, selected: selected, disabled: disabled, "data-html": "#{classed_item}&nbsp#{item}"))
         end
       end
 
