@@ -39,6 +39,8 @@
   <%= render 'disabled_modules_form', config: config %>
 <% when "arcdps_updates", "game_updates" %>
   <%= render 'updates_form', config: config %>
+<% when "commander_role_ids" %>
+  <%= render 'commander_roles_form', config: config %>
 <% else %>
   <div><pre><code><%= JSON.pretty_generate(@config.value) %></code></pre></div>
 <% end %>

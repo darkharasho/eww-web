@@ -1,0 +1,23 @@
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    new SlimSelect({
+      select: '#selectRoles',
+      settings: {
+        closeOnSelect: false,
+        allowDeselect: true,
+        maxSelected: 25,
+        maxValuesShown: 25,
+      },
+    })
+  </script>
+<% end %>
+
+<%= form_for @config do |form| %>
+  <div class="row">
+    <div class="six columns">
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:alternate_email).md_18 %>&nbspCommander Roles</label>
+      <%= form.select :value, options_for_select(@role_multiselect, selected: @config.value), {}, {id: "selectRoles", class: 'u-full-width slim-dropdown', multiple: true} %>
+    </div>
+  </div>
+  <%= form.submit class: "button-primary" %>
+<% end %>

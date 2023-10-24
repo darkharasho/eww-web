@@ -5,7 +5,7 @@ class ConfigsController < ApplicationController
   def edit
     @config = Config.find(params[:id])
 
-    if %w[raid_notification build_manager_role_ids allowed_admin_role_ids raid_reminder].include? @config.name
+    if %w[raid_notification build_manager_role_ids allowed_admin_role_ids raid_reminder commander_role_ids].include? @config.name
       roles = @config.guild.roles
       if roles.class == Hash && roles.dig("message") == "You are being rate limited."
         redirect_to guild_path(@config.guild), alert: "Rate limit reached. Try again later."
