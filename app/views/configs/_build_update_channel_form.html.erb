@@ -1,8 +1,16 @@
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    new SlimSelect({
+      select: '#selectBuildUpdateChannel',
+    })
+  </script>
+<% end %>
+
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %>&nbspBuild Update Channel</label>
-      <%= form.select :value, options_for_select(@config.guild.text_channels.collect { |g| [g["name"], g["id"]] }, @config.value), {}, {class: 'u-full-width'} %>
+      <%= form.select :value, options_for_select(@config.guild.text_channels.collect { |g| [g["name"], g["id"]] }, @config.value), {}, {id: "selectBuildUpdateChannel", class: 'u-full-width slim-dropdown'} %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>

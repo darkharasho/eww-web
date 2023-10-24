@@ -19,6 +19,19 @@
         maxValuesShown: 25,
       },
     })
+
+    new SlimSelect({
+      select: '#selectHideEmptyRows',
+    })
+    new SlimSelect({
+      select: '#selectTableStyle',
+    })
+    new SlimSelect({
+      select: '#selectEnabled',
+    })
+    new SlimSelect({
+      select: '#selectOutputChannel',
+    })
   </script>
 <% end %>
 <div class="row">
@@ -33,15 +46,15 @@
   <div class="row">
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:visibility_off).twotone.md_18 %>&nbspHide Empty Rows</label>
-      <%= select_tag :hide_empty_rows, options_for_select([["True", true], ["False", false]], selected: @config.value["hide_empty_rows"]), class: 'u-full-width' %>
+      <%= select_tag :hide_empty_rows, options_for_select([["True", true], ["False", false]], selected: @config.value["hide_empty_rows"]), id: "selectHideEmptyRows", class: 'u-full-width slim-dropdown' %>
     </div>
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:visibility_off).twotone.md_18 %>&nbspTable Style</label>
-      <%= select_tag :table_style, options_for_select([["Fancy Grid", "fancy_grid"], ["Simple", "simple"], ["List View", "list_view"]], selected: @config.value["table_style"]), class: 'u-full-width' %>
+      <%= select_tag :table_style, options_for_select([["Fancy Grid", "fancy_grid"], ["Simple", "simple"], ["List View", "list_view"]], selected: @config.value["table_style"]), id: "selectTableStyle", class: 'u-full-width slim-dropdown' %>
     </div>
     <div class="four columns">
       <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).twotone.md_18 %>&nbspChannel</label>
-      <%= select_tag :channel_id, options_for_select(@channel_select, selected: @config.value["channel_id"]), class: 'u-full-width' %>
+      <%= select_tag :channel_id, options_for_select(@channel_select, selected: @config.value["channel_id"]), id: "selectOutputChannel", class: 'u-full-width slim-dropdown' %>
     </div>
   </div>
   <div class="row">

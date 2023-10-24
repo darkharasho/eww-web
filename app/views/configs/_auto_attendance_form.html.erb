@@ -6,6 +6,13 @@
       const abbreviation = now.toLocaleTimeString('en-US', options).split(' ')[2];
       return abbreviation;
     }
+
+    new SlimSelect({
+      select: '#selectEnabled',
+    })
+    new SlimSelect({
+      select: '#selectChannel',
+    })
   </script>
 <% end %>
 
@@ -23,13 +30,13 @@
       <label for="exampleRecipientInput" class="inline-icon">
         <%= material_icon.shape(:settings).md_18 %>&nbspEnabled
       </label>
-      <%= select_tag :enabled, options_for_select([["True", true], ["False", false]]), class: 'u-full-width' %>
+      <%= select_tag :enabled, options_for_select([["True", true], ["False", false]]), id: "selectEnabled", class: 'u-full-width slim-dropdown' %>
     </div>
     <div class="six columns">
       <label for="exampleRecipientInput" class="inline-icon">
         <%= material_icon.shape(:tag).md_18 %>&nbspChannel
       </label>
-      <%= select_tag :channel_id, options_for_select(@channel_select), class: 'u-full-width' %>
+      <%= select_tag :channel_id, options_for_select(@channel_select), id: "selectChannel", class: 'u-full-width slim-dropdown' %>
     </div>
   </div>
   <div class="row">

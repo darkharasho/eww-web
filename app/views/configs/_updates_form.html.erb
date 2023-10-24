@@ -1,12 +1,30 @@
+<% content_for :javascript do %>
+  <script type='text/javascript'>
+    new SlimSelect({
+      select: '#selectEnabled',
+    })
+    new SlimSelect({
+      select: '#selectUpdateChannel',
+    })
+  </script>
+<% end %>
+
+<div class="row">
+  <div class="twelve columns">
+    <h4>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:settings).md_36 %>&nbsp<%= @config.name.titleize %></label>
+    </h4>
+  </div>
+</div>
 <%= form_for @config do |form| %>
   <div class="row">
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:settings).md_18 %>&nbspEnabled</label>
-      <%= select_tag :enabled, options_for_select([["True", true], ["False", false]], @config.value["enabled"]), class: 'u-full-width' %>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:toggle_on).md_18 %>&nbspEnabled</label>
+      <%= select_tag :enabled, options_for_select([["True", true], ["False", false]], @config.value["enabled"]), id: "selectEnabled", class: 'slim-dropdown u-full-width' %>
     </div>
     <div class="six columns">
-      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %>&nbspBuild Update Channel</label>
-      <%= select_tag :channel_id, options_for_select(@config.guild.text_channels.collect { |g| [g["name"], g["id"]] }, @config.value["channel_id"]), class: 'u-full-width' %>
+      <label for="exampleRecipientInput" class="inline-icon"><%= material_icon.shape(:tag).md_18 %>&nbspUpdate Channel</label>
+      <%= select_tag :channel_id, options_for_select(@config.guild.text_channels.collect { |g| [g["name"], g["id"]] }, @config.value["channel_id"]), id: "selectUpdateChannel", class: 'slim-dropdown u-full-width' %>
     </div>
   </div>
   <%= form.submit class: "button-primary" %>
